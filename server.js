@@ -1,19 +1,20 @@
+const mongoose = require("mongoose");
+
 const app = require("./app");
 
-const mongoConnect = require("./db/dbConnect");
+const { DB_HOST, PORT = 8000 } = process.env;
 
-const { PORT } = process.env;
+mongoose.set("strictQuery", true);
 
-const startServer = async () => {
-  try {
-    await mongoConnect(
-      app.listen(PORT, () => {
-        console.log(`Server running. Use our API on port: ${PORT}`);
-      })
-    );
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-startServer();
+mongoose
+  .connect(DB_HOST)
+  .then(() => {
+    console.log("Database connection successful");
+    app.listen(PORT, () => {
+      console.log("Server running. Use our API on port: 8000");
+    });
+  })
+  .catch((error) => {
+    console.log(error.message);
+    process.exit(1);
+  });
