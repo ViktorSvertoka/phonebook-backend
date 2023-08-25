@@ -8,6 +8,10 @@ const handleMongooseError = require("../helpers/handleMongooseError");
 
 const userSchema = new Schema(
   {
+    name: {
+      type: String,
+    },
+
     email: {
       type: String,
       match: emailRegex,
@@ -53,6 +57,8 @@ const userSchema = new Schema(
 userSchema.post("save", handleMongooseError);
 
 const registerSchema = Joi.object({
+  name: Joi.string(),
+
   email: Joi.string().pattern(new RegExp(emailRegex)).required().messages({
     "any.required": `Missing required email field`,
   }),
