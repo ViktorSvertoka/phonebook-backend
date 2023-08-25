@@ -1,13 +1,13 @@
 const express = require("express");
 
-const ctrl = require("../../controllers/auth");
+const ctrl = require("../controllers/auth");
 
-const validateBody = require("../../middlewares/validateBody");
-const checkBody = require("../../middlewares/checkBody");
-const authenticate = require("../../middlewares/authenticate");
-const upload = require("../../middlewares/upload");
+const validateBody = require("../middlewares/validateBody");
+const checkBody = require("../middlewares/checkBody");
+const authenticate = require("../middlewares/authenticate");
+const upload = require("../middlewares/upload");
 
-const { schemas } = require("../../models/user");
+const { schemas } = require("../models/user");
 
 const router = express.Router();
 
